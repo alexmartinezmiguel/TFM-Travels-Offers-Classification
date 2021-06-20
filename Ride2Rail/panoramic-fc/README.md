@@ -1,4 +1,9 @@
 # Panoramic Feature Collector
+In order to run this Feature Collector, you need to store the data into the [cache][routerank-extractor]
+
+## Note
+In order to run this Feature Collector, you need to be connected to Eurecat VPN. The data from the different countries
+has been mapped and stored in Docker containers from [OpenStreetMap][osm] in Eurecat servers. 
 
 ## Usage
 
@@ -48,3 +53,5 @@ $ curl --header 'Content-Type: application/json' \
          http://localhost:5000/compute
 {"request_id": "123x"}%
 ```
+[routerank-extractor]: https://github.com/alexmartinezmiguel/TFM-Travels-Offers-Classification/tree/main/Ride2Rail/routerank-extractor
+[osm]: https://www.openstreetmap.org
