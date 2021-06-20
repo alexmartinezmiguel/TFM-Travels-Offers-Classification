@@ -1,7 +1,7 @@
 # Weather Feature Collector
 
 ## Usage
-
+In order to run this Feature Collector, you need to store the data into the [cache][routerank-extractor]
 ### Local development (debug on)
 
 ```bash
@@ -48,3 +48,4 @@ $ curl --header 'Content-Type: application/json' \
          http://localhost:5000/compute
 {"request_id": "123x"}%
 ```
+[routerank-extractor]: https://github.com/alexmartinezmiguel/TFM-Travels-Offers-Classification/tree/main/Ride2Rail/routerank-extractor
