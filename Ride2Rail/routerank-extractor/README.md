@@ -4,10 +4,10 @@
 
 1. Create a virtualenv;
 2. Install the requirements: `pip3 install -r requirements.txt`;
-3. Get the [`final1.json.gz`][final1], [`final2.json.gz`][final2] files and
-   save them in the `data/`;
+3. Get the `final1.json.gz`, `final2.json.gz` files (routeRANK data) and
+   save them in a `data/` folder;
 4. If you want to import data from the RDB dump, get the
-   [`routerank.rdb`][routerank-rdb] file and save it in the `data/`;
+   `routerank.rdb` file and save it in the `data/`;
 
 ## Usage (standalone)
 
@@ -288,8 +288,6 @@ optional arguments:
 * [RedisJSON: A Redis JSON Store][redislabs]
 * [A presentation by Itamar Haber, Redis Labs][itamar_haber]
 
-[final1]: http://bit.ly/R2R-final1-json-gz
-[final2]: http://bit.ly/R2R-final2-json-gz
-[routerank-rdb]: http://bit.ly/R2R-routerank-rdb
+
 [redislabs]: https://redislabs.com/blog/redis-as-a-json-store/
 [itamar_haber]: https://www.youtube.com/watch?v=NLRbq2FtcIk
