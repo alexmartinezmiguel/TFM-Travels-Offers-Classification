@@ -1,6 +1,8 @@
 # Classification of Travel Offers for Shared-Mobility Applications
 
-This repository contains all the code produced and needed for the development of my master's thesis as a part of the MSc in Principle Fundamentals of Data Science. The work has been developed in framework of the Europen project called Ride2Rail.
+This repository contains all the code produced and needed for the development of my master's thesis as a part of the MSc in Principle Fundamentals of Data Science.
+
+The work has been developed in the framework of a European project called Ride2Rail and whose objective is to build an innovative system to classify multimodal mobility solutions along different categories.  On the one hand, we provide a detailed description of the three modules developed in this work which are to be incorporated in the Ride2Rail system. On the other hand, we use a simplified version of this multimodal offer classifier to categorize a set of trip alternatives. Finally, we train a recommender system to learn users’ preferences and generate personalized trip offer rankings. We compare two different approaches: one without including the categorization of the offers (i.e., without content) and one including it. This last approach shows considerably better results and therefore proves the usefulness of this specific categorization.
 
 ## Contributions
 
