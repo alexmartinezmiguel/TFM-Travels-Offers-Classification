@@ -4,7 +4,7 @@ import bisect
 from collections import OrderedDict
 import reverse_geocode
 
-# DICTIONARIES
+# Definition of dictionaries and lists needed for the functions below
 
 # TEMPERATURE
 weather_scenarios_apparent_temperature = {
@@ -236,8 +236,11 @@ weather_scenarios = {
 
 
 def check_rain_snow(forecast):
-    """The categories of rain and snow are not alway availabe. This function checks for if they are present
-    in the data and returns None otherwise"""
+    """
+    The categories of rain and snow are not alway availabe. This function checks if they are present
+    in the data and returns None otherwise
+    - Input: Dictionary with the weather forecast from OpenWeatherMap
+    """
     weather_scenarios = ['rain', 'snow']
     main = dict()
     for condition in forecast['weather']:
@@ -251,6 +254,9 @@ def check_rain_snow(forecast):
 
 
 def map_temperature_category(temperature):
+    """
+    This function maps the temperature in degrees celsius (as get from the API) to the temperature labels
+    """
     temperature_ranges_corrected = [float(t - 0.001) for t in temperature_ranges]
 
     pos = bisect.bisect_left(temperature_ranges_corrected, temperature)
@@ -278,6 +284,9 @@ def map_temperature_category(temperature):
 
 
 def map_cloud_category(cloudiness):
+    """
+    This function maps the cloudiness (as get from the API) to the cloud labels
+    """
     clouds_percentages_corrected = [float(c - 0.001) for c in clouds_percentages]
 
     pos = bisect.bisect_left(clouds_percentages_corrected, cloudiness)
@@ -305,6 +314,7 @@ def map_cloud_category(cloudiness):
 
 
 def map_precipitation_category(description):
+    """This function maps the data from the API to the precipitation labels"""
     key = description.lower()
     precipitation_category = None
     precipitation_main = None
@@ -315,10 +325,10 @@ def map_precipitation_category(description):
     return precipitation_category, precipitation_main
 
 
-# Given boundaries, find interval
-# See:
-# https://stackoverflow.com/a/13942715/2377454
 def map_wind_category(wind_speed):
+    """
+    This function maps the wind speed (as get from the API) to the wind labels
+    """
     if wind_speed <= 0:
         wind_speed = 0
 
@@ -347,10 +357,12 @@ def map_wind_category(wind_speed):
     return wind_category, wind_description, wind_beaufort_number
 
 
-#   * weather_characteristic: one of clouds, rain, wind, or temperature
-#   * weather_condition: the condition for that weather characteristics
-# return the matching scenarios
 def match_scenarios(weather_characteristic, weather_condition):
+    """
+    - weather_characteristic: one of clouds, rain, wind, or temperature
+    - weather_condition: the condition for that weather characteristics
+    - output: matching scenarios
+    """
     wcond = weather_condition
     if weather_condition is None:
         wcond = "none"
@@ -367,6 +379,9 @@ def match_scenarios(weather_characteristic, weather_condition):
 
 
 def map_weather_scenarios(clouds, precipitation, wind, temperature):
+    """
+    Given the labels for each clouds, precipitation, wind and temperature, it returns the weather scenarios
+    """
     match_clouds = match_scenarios("clouds", clouds)
     match_precipitation = match_scenarios("precipitation", precipitation)
     match_wind = match_scenarios("wind", wind)
@@ -388,6 +403,9 @@ extreme_scenarios = ['uncomfortable temperature', 'rainy/snowy', 'windy']
 
 
 def extreme_condition(trip_scenarios):
+    """
+    This function returns the extreme weather conditions from the whole set of weather scenarios
+    """
     trip_extreme_conditions = []
     for scenario in trip_scenarios:
         if scenario in extreme_scenarios:
@@ -396,6 +414,10 @@ def extreme_condition(trip_scenarios):
 
 
 def probability_delay(conditions):
+    """
+    This function returns a probability of delay depending on the number of extreme conditions in the weather scenarios.
+    We use the ROD weights as default probabilities
+    """
     if len(conditions) == 0:
         return 0
     elif len(conditions) == 1:
@@ -407,6 +429,7 @@ def probability_delay(conditions):
 
 
 def get_city(lat, lon):
+    """Given the latitude and longitude, it returns the name of the city"""
     location = reverse_geocode.search([(lat, lon)])
     city = location[0]['city']
     return city
