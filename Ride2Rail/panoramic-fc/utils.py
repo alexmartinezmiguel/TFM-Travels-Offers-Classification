@@ -1,6 +1,7 @@
 import numpy as np
 from shapely.geometry import Polygon
 
+# Load the shapes of the different countries (coordinates of the shapes)
 # belgium
 belgium_shape = np.loadtxt('polygons/belgium.txt')
 belgium_polygon = Polygon(belgium_shape)
@@ -37,7 +38,9 @@ switzerland_polygon = Polygon(switzerland_shape)
 
 
 def check_country(intial_coordinates):
-    """This function compute in which country the given coordinate belongs to"""
+    """
+    This function compute in which country the given coordinates belongs to
+    """
     if belgium_polygon.contains(intial_coordinates):
         return 'belgium'
     elif czech_republic_polygon.contains(intial_coordinates):
@@ -65,6 +68,9 @@ def check_country(intial_coordinates):
 
 
 def osm_query(lat_ini, long_ini, lat_end, long_end):
+    """
+    This function writes the query for the OpenStreetMap (given the coordinates)
+    """
     query = """
     [out:json];
     (
