@@ -152,9 +152,6 @@ for request_id in unique_requests_id[0:5000]:
                 offer_social.setdefault(offer_id, ridesharing)
                 offer_fraction_bike_walk.setdefault(offer_id,
                                                     legs_bike_walk / len(output_tripleg_level[offer_id]['triplegs']))
-                # offer_length_bike_walking.setdefault(offer_id,
-                #                                     distance_bike_walk / float(
-                #                                         output_offer_level[offer_id]['distance']))
                 offer_length_bike_walking.setdefault(offer_id, distance_bike_walk)
 
                 # find the alternative the user chose
