@@ -8,6 +8,9 @@ from geojson import LineString
 
 
 def leg_type(mode):
+    """
+    This function classifies the leg depending on the mode of transport (continuous, timed and ridesharing)
+    """
     continuous_leg = ['walking', 'bike', 'car']
     timed_leg = ['train', 'taxi', 'change', 'bus', 'subway', 'tram', 'genericpubtrans', 'boat', 'funicular']
     ridesharing_leg = ['carsharing', 'bikesharing']
@@ -20,6 +23,10 @@ def leg_type(mode):
 
 
 def mapping_transport_mode(t_mode):
+    """
+    This function maps the mode of transport to the names specify in the offer cache schema (it solves the
+    discrepancies between the routeRANK and TRIAS format)
+    """
     transports_to_map = {'bike': 'cycle',
                          'boat': 'water',
                          'car': 'self-drive-car',
@@ -36,17 +43,26 @@ def mapping_transport_mode(t_mode):
 
 
 def get_coordinates(offer, place):
+    """
+    This functions gets the coordinates from a place of a given routeRANK offer
+    """
     lat, lon = offer['places'][place]['latitude'], offer['places'][place]['longitude']
     return float(lat), float(lon)
 
 
 def get_time_format(dur):
+    """
+    This function writes the duration in the format specified by the offer cache schema
+    """
     sec = timedelta(seconds=dur)
     d = datetime(10, 10, 10) + sec
     return 'P%dY%dM%dDT%dH%dM%dS' % (d.year - 10, d.month - 10, d.day - 10, d.hour, d.minute, d.second)
 
 
 def transform_trip(trip):
+    """
+    This function transform a set of alternatives in the routeRANK dataset to the offer cache schema
+    """
     request_id = '{tripId}-{legId}'.format(tripId=trip['tripId'], legId=trip['legId'])
     example_new_format = dict()
     example_new_format.setdefault(request_id, {})
