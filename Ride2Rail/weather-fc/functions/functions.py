@@ -429,7 +429,9 @@ def probability_delay(conditions):
 
 
 def get_city(lat, lon):
-    """Given the latitude and longitude, it returns the name of the city"""
+    """
+    Given the latitude and longitude, it returns the name of the city
+    """
     location = reverse_geocode.search([(lat, lon)])
     city = location[0]['city']
     return city
