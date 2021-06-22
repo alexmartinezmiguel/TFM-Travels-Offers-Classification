@@ -10,7 +10,7 @@ from r2r_offer_utils.logging import setup_logger
 from r2r_offer_utils.cache_operations import read_data_from_cache_wrapper, store_simple_data_to_cache_wrapper
 from r2r_offer_utils.normalization import zscore, minmaxscore
 
-from mapping.functions import *
+from functions.functions import *
 
 from datetime import datetime
 import geojson
@@ -82,7 +82,7 @@ def extract():
     current_time = datetime.fromisoformat('2021-05-18 00:05:00+00:00')
     # current_time = datetime.replace(current_time, tzinfo=None)
     for elements in cities_day.items():
-        # get offer_id and leg_id of just the first element of each city and date
+        # get offer_id and leg_id of just the first element of each city and date pair
         offer_key = elements[1][0]
         offer_id = offer_key[0]
         leg_id = offer_key[1]
@@ -94,7 +94,7 @@ def extract():
         track = geojson.loads(output_tripleg_level[offer_id][leg_id]['leg_stops'])
         leg_coordinates = np.array(track['coordinates'][0])
 
-        # data from API
+        # contact OpenWeatherMap
         url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&exclude=minutely" \
               "&units=metric" % (leg_coordinates[0], leg_coordinates[1], api_key)
         response_api = requests.get(url).text
