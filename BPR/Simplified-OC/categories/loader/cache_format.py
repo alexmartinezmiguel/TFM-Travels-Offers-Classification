@@ -7,12 +7,18 @@ import os
 
 
 def random_with_n_digits(n):
+    """
+    This function generates a random number of 'n' digits. Used to assign a unique id to each offer
+    """
     range_start = 10 ** (n - 1)
     range_end = (10 ** n) - 1
     return randint(range_start, range_end)
 
 
 def leg_type(mode):
+    """
+    This function classifies the leg depending on the mode of transport (continuous, timed and ridesharing)
+    """
     continuous_leg = ['walking', 'bike', 'car']
     timed_leg = ['train', 'taxi', 'change', 'bus', 'subway', 'tram', 'genericpubtrans', 'boat', 'funicular']
     ridesharing_leg = ['carsharing', 'bikesharing']
@@ -25,6 +31,10 @@ def leg_type(mode):
 
 
 def mapping_transport_mode(t_mode):
+    """
+    This function maps the mode of transport to the names specify in the offer cache schema (it solves the
+    discrepancies between the routeRANK and TRIAS format)
+    """
     transports_to_map = {'bike': 'cycle',
                          'boat': 'water',
                          'car': 'self-drive-car',
@@ -39,6 +49,9 @@ def mapping_transport_mode(t_mode):
 
 
 def mapping_privacy_level(t_mode):
+    """
+    This function assigns a predefined privacy level depending on the transport mode
+    """
     privacy_dict = {'cycle': 5,
                     'water': 3,
                     'self-drive-car': 5,
@@ -58,6 +71,9 @@ def mapping_privacy_level(t_mode):
 
 
 def mapping_seat_quality(t_mode):
+    """
+    This function assigns a predefined seating quality depending on the transport mode
+    """
     comfort_dict = {'cycle': 2,
                     'water': 3,
                     'self-drive-car': 5,
@@ -76,11 +92,17 @@ def mapping_seat_quality(t_mode):
 
 
 def get_coordinates(offer, place):
+    """
+    This functions gets the coordinates from a place of a given routeRANK offer
+    """
     lat, lon = offer['places'][place]['latitude'], offer['places'][place]['longitude']
     return float(lat), float(lon)
 
 
 def get_time_format(dur):
+    """
+    This function writes the duration in the format specified by the offer cache schema
+    """
     sec = timedelta(seconds=dur)
     d = datetime(10, 10, 10) + sec
     return 'P%dY%dM%dDT%dH%dM%dS' % (d.year - 10, d.month - 10, d.day - 10, d.hour, d.minute, d.second)
