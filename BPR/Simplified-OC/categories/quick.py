@@ -2,7 +2,9 @@ import isodate
 
 
 def compute_duration(durations):
-    """The input is dictionary containing the duration of each one of the alternatives
+    """
+    This function returns the normalized duration of each alternative
+    - Input: dictionary containing the duration of each one of the alternatives
     in the format specified by the offer-cache"""
     durations_minutes = dict()
     days_to_minute = 1440
@@ -19,7 +21,9 @@ def compute_duration(durations):
 
 
 def compute_single_duration(duration):
-    """The input is a string with the duration in xsd format"""
+    """
+    - Input: string with the duration in xsd format
+    """
     days_to_minute = 1440
     seconds_to_minutes = 1 / 60
     try:

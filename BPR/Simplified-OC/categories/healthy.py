@@ -3,7 +3,9 @@ from categories.utils.utils import zscore
 
 
 def compute_normalized_bike_walk_dist(bike_walk_dict, dist_dict, flipped=False):
-    """The inputs are dictionaries:
+    """
+    This function returns the normalized walking/bike distance of each alternative
+    The inputs are dictionaries:
      - bike_walk_dict: contains the distance covered by walk/bike (in km)
      - dist_dict: contains the distance covered by each offer (in km)"""
     fraction_bike_walk = dict()

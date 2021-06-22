@@ -3,9 +3,12 @@ from categories.utils.utils import zscore
 
 
 def compute_normalized_co2_km(co2_dict, dist_dict):
-    """The inputs are dictionaries:
+    """
+    This function returns the normalized co2/km of each alternative
+    The inputs are dictionaries:
      - co2_dict: contains the co2 emissions of each alternative (in kg)
-     - dist_dict: contains the distance covered by each offer (in km)"""
+     - dist_dict: contains the distance covered by each offer (in km)
+     """
     co2_per_km = dict()
     for co2, distance in zip(co2_dict.items(), dist_dict.values()):
         key = co2[0]
