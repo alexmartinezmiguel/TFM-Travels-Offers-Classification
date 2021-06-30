@@ -120,11 +120,11 @@ class BPR():
             exponential = (np.exp(-f_ij))/(1+np.exp(-f_ij))
 
             # update parameters
-            self.user_vecs[user_index,:] += self.learning_rate*(exponential*(self.item_vecs[positive_offer_index,:] -                                                                              self.item_vecs[negative_offer_index,:]) +                                                                 self.lmbda*self.user_vecs[user_index,:])
+            self.user_vecs[user_index,:] += self.learning_rate*(exponential*(self.item_vecs[positive_offer_index,:] - self.item_vecs[negative_offer_index,:]) + self.lmbda*self.user_vecs[user_index,:])
             
-            self.item_vecs[positive_offer_index,:] += self.learning_rate*(exponential* self.user_vecs[user_index,:] +                                                                      self.lmbda*self.item_vecs[positive_offer_index,:])
+            self.item_vecs[positive_offer_index,:] += self.learning_rate*(exponential* self.user_vecs[user_index,:] + self.lmbda*self.item_vecs[positive_offer_index,:])
             
-            self.item_vecs[negative_offer_index,:] += self.learning_rate*(-exponential* self.user_vecs[user_index,:] +                                                                      self.lmbda*self.item_vecs[negative_offer_index,:])
+            self.item_vecs[negative_offer_index,:] += self.learning_rate*(-exponential* self.user_vecs[user_index,:] + self.lmbda*self.item_vecs[negative_offer_index,:])
             if i%self.compute_metrics==0:
                 self.metrics_iterations.append(i)
                 print('{}/12'.format(j))
